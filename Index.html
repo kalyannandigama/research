@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UTD AMML - System Diagnostic</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body { background-color: #050505; color: #2ecc71; font-family: 'Courier New', monospace; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
+        #console { width: 80%; max-width: 600px; line-height: 1.6; }
+        .error { color: #e74c3c; font-weight: bold; }
+        .hidden { display: none; }
+        #valentine { text-align: center; color: #ff4757; }
+        button { background: #ff4757; border: none; padding: 15px 30px; color: white; border-radius: 50px; cursor: pointer; font-size: 1.5rem; font-weight: bold; margin-top: 20px; transition: transform 0.2s; }
+        button:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+<div id="console">
+    <p id="line1">> Initializing L-PBF Multi-Material Scan...</p>
+    <p id="line2" class="hidden">> Checking substrate adhesion... [OK]</p>
+    <p id="line3" class="hidden">> Calibrating Laser Power (400W)... [OK]</p>
+    <p id="line4" class="hidden">> WARNING: UNKNOWN MATERIAL PROPERTY DETECTED</p>
+    <p id="line5" class="hidden" style="color: #f1c40f;">> Analysis: Subject exhibits 100% "Perfect" density.</p>
+    <p id="line6" class="hidden" class="error">> [FATAL ERROR] System cannot handle this much beauty.</p>
+    <p id="line7" class="hidden" class="error">> REBOOTING SYSTEM...</p>
+</div>
+
+<div id="valentine" class="hidden">
+    <h1 style="font-size: 4rem; margin-bottom: 0;">❤️</h1>
+    <h2 style="color: #ffffff; margin-top: 10px;">System failure successful.</h2>
+    <p style="color: #bdc3c7;">The lab can wait, but I can't.</p>
+    <h1 style="font-size: 2.5rem;">Will you be my Valentine?</h1>
+    <button id="yesButton">YES!</button>
+</div>
+
+<script>
+    // Typing effect for the console
+    const lines = [2,3,4,5,6,7];
+    lines.forEach((num, i) => {
+        setTimeout(() => {
+            document.getElementById('line' + num).classList.remove('hidden');
+        }, (i + 1) * 1200);
+    });
+
+    // Transition to Valentine message
+    setTimeout(() => {
+        document.getElementById('console').style.display = 'none';
+        document.getElementById('valentine').classList.remove('hidden');
+    }, 9500);
+
+    // Confetti Trigger
+    document.getElementById('yesButton').addEventListener('click', () => {
+        var duration = 5 * 1000;
+        var end = Date.now() + duration;
+
+        (function frame() {
+            confetti({
+                particleCount: 7,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: ['#ff4757', '#ffffff', '#ff6b81']
+            });
+            confetti({
+                particleCount: 7,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: ['#ff4757', '#ffffff', '#ff6b81']
+            });
+
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+        }());
+        
+        document.getElementById('yesButton').innerHTML = "I LOVE YOU! ❤️";
+    });
+</script>
+</body>
+</html>
